@@ -17,6 +17,8 @@ CMake and CTest integration of the BATS shell testing framework, allowing automa
 
 # usage
 
+## using FetchContent
+
 In your CMakeLists.txt
 
 ```cmake
@@ -41,5 +43,19 @@ file(GLOB BATS_TEST_FILES_SRC *.sh *.bats)
 bats_discover_tests("${BATS_TEST_FILES_SRC}")
 ```
 
+## using CPM
+
+In your CMakeLists.txt, assuming CPM is already [added](https://github.com/cpm-cmake/CPM.cmake?tab=readme-ov-file#adding-cpm)
+
+```cmake
+include(CTest)
+
+# include bats test discovery
+CPMAddPackage("gh:neonsoftware/cmake-bats@0.0.3")
+
+# discover all tests in all .bats files
+file(GLOB BATS_TEST_FILES_SRC *.sh *.bats)
+bats_discover_tests("${BATS_TEST_FILES_SRC}")
+```
 
 Or see how the C++ application is tested in the [sample project](./sample-project).
